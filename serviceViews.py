@@ -1,4 +1,4 @@
-from prometheus_client import start_http_server, Summary
+from prometheus_client import start_http_server
 from flask import Flask
 import time
 import random
@@ -24,8 +24,12 @@ def process(word):
             text.lower().split().count(word)
     return text.lower().split().count(word)
 
+@app.route("/hello")
+def hello():
+    return("Czesc.")
+
 @app.route("/process/<word>/")
-def hello(word):
+def process_word(word):
     start_time = time.time()
     word_count = process(word)
     result_dice = random.randint(0,100)
